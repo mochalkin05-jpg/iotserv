@@ -1,0 +1,18 @@
+1> c(code_lock_v5).
+{ok,code_lock_v5}
+2> {ok, Pid} = code_lock_v5:start_link([1,2,3]).
+{ok,<0.89.0>}
+3> code_lock_v5:button(1).
+ok
+4> code_lock_v5:button(2).
+ok
+5> code_lock_v5:button(3).
+unlocked
+6> code_lock_v5:button(9), code_lock_v5:button(9), code_lock_v5:button(9).
+{error,incorrect_code}
+7> code_lock_v5:button(9), code_lock_v5:button(9), code_lock_v5:button(9).
+{error,incorrect_code}
+8> code_lock_v5:button(9), code_lock_v5:button(9), code_lock_v5:button(9).
+{error,suspended_due_to_failures}
+9> code_lock_v5:button(1).
+{error,suspended}
